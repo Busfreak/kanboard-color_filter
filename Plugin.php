@@ -25,7 +25,7 @@ class Plugin extends Base
 
     public function getPluginDescription()
     {
-        return t('Legende f&uuml;r Zentrumsfarbe zum Board hinzuf&uuml;gen');
+        return t('Add color filter to board view');
     }
 
     public function getPluginAuthor()
