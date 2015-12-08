@@ -1,4 +1,4 @@
-# kanboard-color_filter
+﻿# kanboard-color_filter
 
 This plugin provides additional color-based filter for the board-view.
 * name each color for tasks with your own description (translation overwrite)

@@ -1,4 +1,4 @@
-<div class="color-picker">
+﻿<div class="color-picker">
 <?php foreach ($colors_list as $color_id => $color_name): ?>
     <div
         data-color-id="<?= $color_id ?>"
