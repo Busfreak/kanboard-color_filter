@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
   $colors_list = $this->task->getColors();
 ?>
     <div class="filter-dropdowns">

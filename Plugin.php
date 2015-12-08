@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 namespace Kanboard\Plugin\Color_filter;
 
