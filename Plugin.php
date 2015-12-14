@@ -13,7 +13,7 @@ class Plugin extends Base
         $this->template->hook->attach('template:project:header:after', 'color_filter:project/filters');
         $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
-        $this->on('session.bootstrap', function($container) {
+        $this->on('app.bootstrap', function($container) {
             Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
         });
     }

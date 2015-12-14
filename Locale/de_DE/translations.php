@@ -1,22 +1,22 @@
 <?php
 
 return array(
-    'Yellow' => 'T&Uuml;V Nebenabw.',
-    'Blue' => 'T&Uuml;V Verbesserung',
+    'Yellow' => 'TÜV Nebenabw.',
+    'Blue' => 'TÜV Verbesserung',
     'Green' => 'eigene Eingabe',
     'Purple' => 'amtliche Begehung',
-    'Red' => 'T&Uuml;V Abweichung',
+    'Red' => 'TÜV Abweichung',
     'Orange' => 'int. Abweichung',
     'Grey' => 'int. Verbesserung',
     'Brown' => 'Braun',
     'Deep Orange' => 'Auditteam',
     'Dark Grey' => 'QM Lenkung',
     'Pink' => 'DKG Abweichung',
-    'Teal' => 'T&uuml;rkis',
+    'Teal' => 'Türkis',
     'Cyan' => 'andere Begehung',
     'Lime' => 'DKG Hinweis',
     'Light Green' => 'int. Nebenabweichung',
     'Amber' => 'Braun  (Amber)',
     'Color coding' => 'Farbkodierung',
-    'append' => 'hinzuf&uuml;gen',
+    'append' => 'hinzufügen',
 );

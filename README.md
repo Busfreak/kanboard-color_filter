@@ -9,3 +9,6 @@ This plugin provides additional color-based filter for the board-view.
 Create a folder Color_filter in the plugin folder an copy all files inside. Adjust color names in Locale.
 
 Tested with Kanboard 1.0.21
+
+Changes for 1.0.22:
+Event removed: "session.bootstrap" use "app.boostrap" instead
