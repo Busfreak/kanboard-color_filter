@@ -1,7 +1,6 @@
 <?php 
   $colors_list = $this->task->getColors();
 ?>
-    <div class="filter-dropdowns">
       <div class="dropdown filters">
         <i class="fa fa-caret-down"></i> <a href="#" class="dropdown-menu"><?= t('Color coding') ?></a>
         <ul class="color_filter">
@@ -11,4 +10,3 @@
         <?php endforeach ?>
         </ul>
       </div>
-    </div>
