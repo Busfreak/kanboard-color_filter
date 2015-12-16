@@ -10,7 +10,7 @@ class Plugin extends Base
     public function initialize()
     {
 
-        $this->template->hook->attach('template:project:header:after', 'color_filter:project/filters');
+        $this->template->hook->attach('template:app:filters_helper:after', 'color_filter:app/color_filter');
         $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
         $this->template->setTemplateOverride('app/filters_helper', 'color_filter:app/filters_helper');
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
@@ -36,6 +36,6 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '1.0.1';
+        return '1.0.2';
     }
 }
