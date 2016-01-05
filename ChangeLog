@@ -1,3 +1,16 @@
+Version 1.0.3
+-------------
+
+New features:
+
+- Introducing individual colornames for each project using ProjectMetadata
+
+Depends on:
+
+Kanboard Version 1.0.23
+
+- method to remove metadata
+
 Version 1.0.2
 -------------
 

@@ -4,6 +4,7 @@ namespace Kanboard\Plugin\Color_filter;
 
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
+use Kanboard\Core\Security\Role;
 
 class Plugin extends Base
 {
@@ -17,6 +18,18 @@ class Plugin extends Base
         $this->on('app.bootstrap', function($container) {
             Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
         });
+
+    $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
+    $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
+    }
+
+    public function getClasses()
+    {
+        return array(
+            'Plugin\Color_filter\Model' => array(
+                'Colors',
+            )
+        );
     }
 
     public function getPluginName()
