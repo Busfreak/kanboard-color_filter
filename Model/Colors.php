@@ -82,7 +82,7 @@ class Colors extends Base
      */
     public function create(array $values)
     {
-        return $this->projectMetadata->save($values['project_id'], ['color_filter_' . $values['color_id'] => $values['projectcolorname']]);
+        return $this->projectMetadata->save($values['project_id'], array('color_filter_' . $values['color_id'] => $values['projectcolorname']));
     }
 
     /**
