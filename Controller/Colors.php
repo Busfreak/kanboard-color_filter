@@ -21,7 +21,7 @@ class Colors extends Base
     {
         $project = $this->getProject();
         $project_colors = $this->colors->getAssigned($project['id']);
-        $colors = $this->colors->getColors();
+        $colors = $this->helper->task->getColors();
 
         $this->response->html($this->projectLayout('color_filter:colors/index', array(
             'project' => $project,
@@ -83,7 +83,7 @@ class Colors extends Base
     public function edit(array $values = array(), array $errors = array())
     {
         $project = $this->getProject();
-        $colors = $this->colors->getColors();
+        $colors = $this->helper->task->getColors();
         $color_id = $this->request->getStringParam('color_id');
         $color_name = $colors[$color_id];
         $values['color_id'] = $color_id;
