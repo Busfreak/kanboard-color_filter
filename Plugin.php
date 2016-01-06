@@ -45,7 +45,7 @@ class Plugin extends Base
 
     public function getPluginDescription()
     {
-        return t('Add color filter to board view');
+        return t('Add color filter to board view and dashboard');
     }
 
     public function getPluginAuthor()
@@ -55,6 +55,11 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '1.0.2';
+        return '1.1.0';
+    }
+
+	    public function getPluginHomepage()
+    {
+        return 'https://github.com/Busfreak/kanboard-color_filter';
     }
 }

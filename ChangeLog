@@ -1,9 +1,11 @@
-Version 1.0.3
+Version 1.1.0
 -------------
 
 New features:
 
 - Introducing individual colornames for each project using ProjectMetadata
+- filter in dashboard shows system color names
+- filter in project shows individual color names
 
 Depends on:
 
