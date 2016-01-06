@@ -31,21 +31,16 @@ class Colors extends Base
     public function getAssigned($project_id)
     {
         $colors_assigned = $this->projectMetadata->getAll($project_id);
-		$colors = $this->colors->getColors();
+        $colors = $this->helper->task->getColors();
 
         foreach ($colors as $color_id => $color_name) {
-		if (array_key_exists ('color_filter_' . $color_id, $colors_assigned))
-			$color_assigned_clean[$color_id] = $colors_assigned['color_filter_' . $color_id];
-		else
-			$color_assigned_clean[$color_id] = "";
+            if (array_key_exists ('color_filter_' . $color_id, $colors_assigned))
+                $color_assigned_clean[$color_id] = $colors_assigned['color_filter_' . $color_id];
+            else
+                $color_assigned_clean[$color_id] = "";
         }
             
         return $color_assigned_clean;
-    }
-
-    public function getColors()
-    {
-        return $this->helper->task->getColors();
     }
 
     /**

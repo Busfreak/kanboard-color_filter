@@ -28,6 +28,7 @@ class Plugin extends Base
         return array(
             'Plugin\Color_filter\Model' => array(
                 'Colors',
+                'Colors_helper',
             )
         );
     }
