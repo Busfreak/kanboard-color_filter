@@ -12,12 +12,10 @@ class Plugin extends Base
     {
 
         $this->template->hook->attach('template:app:filters_helper:after', 'color_filter:app/color_filter');
-# patched core files
         $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
+# patched core files, remove when in core
         $this->template->setTemplateOverride('app/filters_helper', 'color_filter:app/filters_helper');
-        $this->template->setTemplateOverride('app/overview', 'color_filter:app/overview');
         $this->template->setTemplateOverride('project/filters', 'color_filter:project/filters');
-        $this->template->setTemplateOverride('search/index', 'color_filter:search/index');
 ####################
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
         $this->on('app.bootstrap', function($container) {
@@ -33,7 +31,6 @@ class Plugin extends Base
         return array(
             'Plugin\Color_filter\Model' => array(
                 'Colors',
-                'Colors_helper',
             )
         );
     }
