@@ -31,4 +31,6 @@ return array(
 //    'Unable to updated your custom colorname.' => '',
 //    'Your custom colorname has been removed successfully.' => '',
 //    'Unable to remove your custom colorname.' => '',
+//    'In use' => '',
+//    'Don\'t use in project' => '',
 );

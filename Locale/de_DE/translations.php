@@ -31,4 +31,6 @@ return array(
     'Unable to updated your custom colorname.' => 'Die benutzerdefinierte Farbbezeichnung konnte nicht aktualisiert werden.',
     'Your custom colorname has been removed successfully.' => 'Ihre benutzerdefinierte Farbbezeichnung wurde erfolgreich gelöscht.',
     'Unable to remove your custom colorname.' => 'Die benutzerdefinierte Farbbezeichnung konnte nicht gelöscht werden.',
+    'In use' => 'Im Gebrauch',
+    'Don\'t use in project' => 'Im Projekt ausblenden',
 );

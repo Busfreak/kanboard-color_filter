@@ -18,7 +18,8 @@
     </div>
 
     <?= $this->form->label(t('Project label'), 'projectcolorname ') ?>
-    <?= $this->form->text('projectcolorname', $values, $errors, array('required', 'maxlength="100"')) ?>
+    <?= $this->form->text('projectcolorname', $values, $errors, array('maxlength="100"')) ?>
+    <?= $this->form->checkbox('projectuse', t('Don\'t use in project'), 1,  $values['projectuse'] == 1) ?>
 
     <div class="form-actions">
         <input type="submit" value="<?= t('Save') ?>" class="btn btn-blue">

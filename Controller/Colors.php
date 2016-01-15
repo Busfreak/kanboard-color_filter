@@ -44,16 +44,16 @@ class Colors extends Base
         $values['user_id'] = $this->userSession->getId();
         $values['project_id'] = $project['id'];
 
-        list($valid, $errors) = $this->colors->validateCreation($values);
+#        list($valid, $errors) = $this->colors->validateCreation($values);
 
-        if ($valid) {
+#        if ($valid) {
             if ($this->colors->create($values)) {
                 $this->flash->success(t('Your custom colorname has been updated successfully.'));
                 $this->response->redirect($this->helper->url->to('colors', 'index', array('plugin' => 'color_filter', 'project_id' => $project['id'])));
             } else {
                 $this->flash->failure(t('Unable to updated your custom colorname.'));
             }
-        }
+#        }
 
         $this->index();
     }
@@ -88,6 +88,7 @@ class Colors extends Base
         $color_name = $colors[$color_id];
         $values['color_id'] = $color_id;
         $values['projectcolorname'] = $this->colors->getColorName($project['id'], $color_id);
+        $values['projectuse'] = $this->colors->getColorUsage($project['id'], $color_id);
 
         $this->response->html($this->projectLayout('color_filter:colors/edit', array(
             'values' => $values,

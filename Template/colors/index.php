@@ -6,6 +6,7 @@
             <th><?= t('Color') ?></th>
             <th><?= t('Application label') ?></th>
             <th><?= t('Project label') ?></th>
+            <th><?= t('In use') ?></th>
             <th><?= t('Actions') ?></th>
         </tr>
         <?php foreach ($colors as $color_id => $color_name): ?>
@@ -13,6 +14,7 @@
             <td class="color color-<?= $color_id ?>"><?= $color_id ?></td>
             <td class="color color-<?= $color_id ?>"><?= $color_name ?></td>
             <td class="color color-<?= $color_id ?>"><?= $project_colors[$color_id] ?></td>
+            <td class="color color-<?= $color_id ?>"><?= $project_colors['color_filter_' . $color_id . '_projectuse'] ?></td>
             <td>
                 <?php if ($this->user->hasProjectAccess('color_filter', 'edit', $project['id'])): ?>
                     <ul style="font-size:80%">

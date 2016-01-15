@@ -28,17 +28,26 @@ class Colors extends Base
      * @param  integer   $project_id
      * @return array
      */
+
+#$this->colors->getColorUsage($project['id'], $color_id);
+
      public function getColors($project_id)
     {
         $colors_assigned = $this->projectMetadata->getAll($project_id);
 		    $colors = $this->helper->task->getColors();
+		    $returncolors = array();
 
         foreach ($colors as $color_id => $color_name) {
-		    if (array_key_exists ('color_filter_' . $color_id, $colors_assigned))
-			      $colors[$color_id] = $colors_assigned['color_filter_' . $color_id];
+            if (!$this->colors->getColorUsage($project_id, $color_id)){
+                if (array_key_exists ('color_filter_' . $color_id, $colors_assigned)){
+                    $returncolors[$color_id] = $colors_assigned['color_filter_' . $color_id];
+                }
+                else
+                    $returncolors[$color_id] = $color_name;
+                }
         }
             
-        return $colors;
+        return $returncolors;
     }
 
     /**
@@ -58,9 +67,28 @@ class Colors extends Base
                 $color_assigned_clean[$color_id] = $colors_assigned['color_filter_' . $color_id];
             else
                 $color_assigned_clean[$color_id] = "";
+            if (array_key_exists ('color_filter_' . $color_id . '_projectuse', $colors_assigned))
+                if ($colors_assigned['color_filter_' . $color_id . '_projectuse'])
+				    $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('No');
+                else
+				    $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('Yes');
+			else
+                $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('Yes');
         }
             
         return $color_assigned_clean;
+    }
+
+    /**
+     * Get colorusage from color_id
+     *
+     * @access public
+     * @param  integer   $color_id
+     * @return array
+     */
+    public function getColorUsage($project_id, $color_id)
+    {
+        return $this->projectMetadata->get($project_id, 'color_filter_' . $color_id . '_projectuse');
     }
 
     /**
@@ -97,7 +125,7 @@ class Colors extends Base
      */
     public function create(array $values)
     {
-        return $this->projectMetadata->save($values['project_id'], array('color_filter_' . $values['color_id'] => $values['projectcolorname']));
+        return $this->projectMetadata->save($values['project_id'], array('color_filter_' . $values['color_id'] => $values['projectcolorname'], 'color_filter_' . $values['color_id'] . '_projectuse' => $values['projectuse']));
     }
 
     /**
