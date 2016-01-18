@@ -18,7 +18,7 @@
     </div>
 
     <?= $this->form->label(t('Project label'), 'projectcolorname ') ?>
-    <?= $this->form->text('projectcolorname', $values, $errors, array('maxlength="100"')) ?>
+    <?= $this->form->text('projectcolorname', $values, $errors, array('maxlength="20"')) ?>
     <?= $this->form->checkbox('projectuse', t('Don\'t use in project'), 1,  $values['projectuse'] == 1) ?>
 
     <div class="form-actions">
