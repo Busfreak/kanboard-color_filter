@@ -8,6 +8,7 @@ Version 1.1.1
 
 Removed obsolete TemplateOverride file
 - project/filters
+- app/filters_helper
 
 Version 1.1.0
 -------------
