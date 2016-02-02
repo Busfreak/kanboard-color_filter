@@ -23,7 +23,7 @@ class Colors extends Base
         $project_colors = $this->colors->getAssigned($project['id']);
         $colors = $this->helper->task->getColors();
 
-        $this->response->html($this->projectLayout('color_filter:colors/index', array(
+        $this->response->html($this->helper->layout->project('color_filter:colors/index', array(
             'project' => $project,
             'colors' => $colors,
             'project_colors' => $project_colors,
