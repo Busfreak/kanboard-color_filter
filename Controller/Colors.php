@@ -67,7 +67,7 @@ class Colors extends Base
     {
         $project = $this->getProject();
 
-        $this->response->html($this->projectLayout('color_filter:colors/remove', array(
+        $this->response->html($this->helper->layout->project('color_filter:colors/remove', array(
             'project' => $project,
             'color_id' => $this->request->getStringParam('color_id'),
             'color_name' => $this->colors->getColorName($project['id'], $this->request->getStringParam('color_id')),
@@ -90,7 +90,7 @@ class Colors extends Base
         $values['projectcolorname'] = $this->colors->getColorName($project['id'], $color_id);
         $values['projectuse'] = $this->colors->getColorUsage($project['id'], $color_id);
 
-        $this->response->html($this->projectLayout('color_filter:colors/edit', array(
+        $this->response->html($this->helper->layout->project('color_filter:colors/edit', array(
             'values' => $values,
             'errors' => $errors,
             'project' => $project,
