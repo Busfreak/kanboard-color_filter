@@ -9,7 +9,7 @@ return array(
     'Red' => 'Rot',
     'Orange' => 'Orange',
     'Grey' => 'Grau',
-    'Brown' => 'Bran',
+    'Brown' => 'Braun',
     'Deep Orange' => 'Dunkelorange',
     'Dark Grey' => 'Dunkelgrau',
     'Pink' => 'Pink',
