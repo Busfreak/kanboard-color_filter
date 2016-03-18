@@ -17,7 +17,7 @@ return array(
     'Cyan' => 'Cyan',
     'Lime' => 'Limette',
     'Light Green' => 'Hellgrün',
-    'Amber' => 'Braun  (Amber)',
+    'Amber' => 'Bernstein',
     'Color coding' => 'Farbkodierung',
     'append' => 'hinzufügen',
     'Application label' => 'Anwendungsbezeichnung',
