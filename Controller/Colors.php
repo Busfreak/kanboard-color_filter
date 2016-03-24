@@ -44,6 +44,18 @@ class Colors extends Base
         $values['user_id'] = $this->userSession->getId();
         $values['project_id'] = $project['id'];
 
+        if (strlen($values['projectcolorname']) == 0)
+        {
+            $this->colors->remove($values['project_id'], $values['color_id']);
+            unset($values['projectcolorname']);
+        }
+
+        if (strlen($values['projectuse']) == 0)
+        {
+            $this->colors->remove($values['project_id'], $values['color_id'] . '_projectuse');
+            unset($values['projectuse']);
+        }
+
 #        list($valid, $errors) = $this->colors->validateCreation($values);
 
 #        if ($valid) {
