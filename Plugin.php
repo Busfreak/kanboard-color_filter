@@ -12,14 +12,17 @@ class Plugin extends Base
     {
 
         $this->template->hook->attach('template:app:filters-helper:after', 'color_filter:app/color_filter');
+        $this->template->hook->attach('template:config:sidebar', 'color_filter:config/sidebar');
+
         $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
         $this->on('app.bootstrap', function($container) {
             Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
         });
 
-    $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
-    $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
+        $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
+        $this->applicationAccessMap->add('colors', 'config', Role::APP_ADMIN);
+        $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
     }
 
     public function getClasses()
@@ -27,6 +30,15 @@ class Plugin extends Base
         return array(
             'Plugin\Color_filter\Model' => array(
                 'Colors',
+            )
+        );
+    }
+
+    public function getHelpers()
+    {
+        return array(
+            'Plugin\Color_filter\Helper' => array(
+                'ColorsHelper'
             )
         );
     }

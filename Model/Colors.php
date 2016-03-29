@@ -28,9 +28,6 @@ class Colors extends Base
      * @param  integer   $project_id
      * @return array
      */
-
-#$this->colors->getColorUsage($project['id'], $color_id);
-
      public function getColors($project_id)
     {
         $colors_assigned = $this->projectMetadata->getAll($project_id);
@@ -57,26 +54,49 @@ class Colors extends Base
      * @param  integer   $project_id
      * @return array
      */
-    public function getAssigned($project_id)
+    public function getProjectColors($project_id)
     {
-        $colors_assigned = $this->projectMetadata->getAll($project_id);
+
+        $app_colors = $this->getAppColors();
+        $projectMetadata = $this->projectMetadata->getAll($project_id);
+        $project_colors = array();
+
+        foreach ($app_colors as $color_id => $color_names) {
+            if (array_key_exists ('color_filter_' . $color_id, $projectMetadata)) {
+                $project_color = $projectMetadata['color_filter_' . $color_id];
+            } else {
+                $project_color = '';
+            }
+
+            if (array_key_exists ('color_filter_' . $color_id . '_hide', $projectMetadata)) {
+                $color_hide = true;
+            } else {
+                $color_hide = false;
+            }
+
+            $project_colors[$color_id] = array('color_name' => $color_names['color_name'], 'app_color' => $color_names['app_color'], 'project_color' => $project_color, 'color_hide' => $color_hide);
+        }
+
+        return $project_colors;
+    }
+
+    /**
+     * Get all assigned colornames for the application
+     *
+     * @access public
+     * @return array
+     */
+    public function getAppColors()
+    {
+        $app_colors = array();
         $colors = $this->helper->task->getColors();
 
         foreach ($colors as $color_id => $color_name) {
-            if (array_key_exists ('color_filter_' . $color_id, $colors_assigned))
-                $color_assigned_clean[$color_id] = $colors_assigned['color_filter_' . $color_id];
-            else
-                $color_assigned_clean[$color_id] = "";
-            if (array_key_exists ('color_filter_' . $color_id . '_projectuse', $colors_assigned))
-                if ($colors_assigned['color_filter_' . $color_id . '_projectuse'])
-				    $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('No');
-                else
-				    $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('Yes');
-			else
-                $color_assigned_clean['color_filter_' . $color_id . '_projectuse'] = t('Yes');
+#            $app_colors['colors_' . $color_id] = $this->config->get('colors_' . $color_id, $color_name);
+            $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->config->get('colors_' . $color_id, $color_name));
         }
             
-        return $color_assigned_clean;
+        return $app_colors;
     }
 
     /**
@@ -123,18 +143,15 @@ class Colors extends Base
      * @param  array    $values    Form values
      * @return boolean
      */
-    public function create(array $values)
+    public function create($project_id, array $values)
     {
         $createarray = array();
-        if (isset ($values['projectcolorname']))
-        {
-            $createarray['color_filter_' . $values['color_id']] = $values['projectcolorname'];
+
+        foreach ($values as $key => $value) {
+            $createarray['color_filter_' . $key] = $value;
         }
-        if (isset ($values['projectuse']))
-        {
-            $createarray['color_filter_' . $values['color_id'] . '_projectuse'] = $values['projectuse'];
-        }
-        return $this->projectMetadata->save($values['project_id'], $createarray);
+
+        return $this->projectMetadata->save($project_id, $createarray);
     }
 
     /**
