@@ -11,6 +11,8 @@ class Plugin extends Base
     public function initialize()
     {
 
+        $this->route->addRoute('/settings/colors', 'colors', 'config', 'color_filter');
+        $this->route->addRoute('/project/:project_id/colors', 'colors', 'index', 'color_filter');
         $this->template->hook->attach('template:app:filters-helper:after', 'color_filter:app/color_filter');
         $this->template->hook->attach('template:config:sidebar', 'color_filter:config/sidebar');
 
