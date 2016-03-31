@@ -13,7 +13,7 @@ use Kanboard\Controller\Base;
 class Colors extends Base
 {
     /**
-     * Colors index page
+     * Colors index page in task settings
      *
      * @access public
      */
@@ -83,7 +83,7 @@ class Colors extends Base
     }
 
     /**
-     * Save a new custom colorname
+     * Save the application colornames
      *
      * @access public
      */
@@ -98,66 +98,5 @@ class Colors extends Base
             }
 
         $this->index();
-    }
-
-    /**
-     * Confirmation dialog before removing a colorname
-     *
-     * @access public
-     */
-    public function confirm()
-    {
-        $project = $this->getProject();
-
-        $this->response->html($this->helper->layout->project('color_filter:colors/remove', array(
-            'project' => $project,
-            'color_id' => $this->request->getStringParam('color_id'),
-            'color_name' => $this->colors->getColorName($project['id'], $this->request->getStringParam('color_id')),
-            'title' => t('Edit custom color'),
-        )));
-    }
-
-    /**
-     * Edit a project color (display the form)
-     *
-     * @access public
-     */
-    public function edit(array $values = array(), array $errors = array())
-    {
-        $project = $this->getProject();
-        $colors = $this->helper->task->getColors();
-        $color_id = $this->request->getStringParam('color_id');
-        $color_name = $colors[$color_id];
-        $values['color_id'] = $color_id;
-        $values['projectcolorname'] = $this->colors->getColorName($project['id'], $color_id);
-        $values['projectuse'] = $this->colors->getColorUsage($project['id'], $color_id);
-
-        $this->response->html($this->helper->layout->project('color_filter:colors/edit', array(
-            'values' => $values,
-            'errors' => $errors,
-            'project' => $project,
-            'color_name' => $color_name,
-            'title' => t('Edit custom color')
-        )));
-    }
-
-    /**
-     * Remove a project color
-     *
-     * @access public
-     */
-    public function remove()
-    {
-        $this->checkCSRFParam();
-        $project = $this->getProject();
-
-        if ($this->colors->remove($project['id'], $this->request->getStringParam('color_id'))) {
-            $this->flash->success(t('Your custom colorname has been removed successfully.'));
-        } else {
-            $this->flash->failure(t('UUnable to remove your custom colorname.'));
-			$this->flash->failure($this->request->getStringParam('color_id'));
-        }
-
-        $this->response->redirect($this->helper->url->to('colors', 'index', array('plugin' => 'color_filter', 'project_id' => $project['id'])));
     }
 }
