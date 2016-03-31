@@ -1,3 +1,15 @@
+Version 1.2.1
+
+Updates for KB 1.0.27
+
+New features:
+- edit all colornames for a project in one form
+- edit application colornames in one form
+
+Changes:
+- move application colornames from language to app settings
+- use new helper registration for colors_helper
+
 Version 1.2.0
 -------------
 
