@@ -18,15 +18,17 @@ class Plugin extends Base
 
         $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
-        $this->on('app.bootstrap', function($container) {
-            Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
-        });
 
         $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
         $this->applicationAccessMap->add('colors', 'config', Role::APP_ADMIN);
         $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
     }
 
+     public function onStartup()
+    {
+        Translator::load($this->language->getCurrentLanguage(), __DIR__.'/Locale');
+    }
+		
     public function getClasses()
     {
         return array(
