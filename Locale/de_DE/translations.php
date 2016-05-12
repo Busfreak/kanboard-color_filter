@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return array(
     'Color Settings' => 'Farbeinstellungen',
@@ -17,4 +17,5 @@ return array(
     'Unable to remove your custom colorname.' => 'Die benutzerdefinierte Farbbezeichnung konnte nicht gelöscht werden.',
     'hide' => 'verstecken',
     'Don\'t use in project' => 'Im Projekt ausblenden',
+
 );
