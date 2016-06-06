@@ -26,7 +26,7 @@ class Plugin extends Base
 
      public function onStartup()
     {
-        Translator::load($this->language->getCurrentLanguage(), __DIR__.'/Locale');
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 		
     public function getClasses()
@@ -64,7 +64,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '1.2.1';
+        return '1.2.2';
     }
 
 	    public function getPluginHomepage()

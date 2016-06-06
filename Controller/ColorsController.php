@@ -2,7 +2,7 @@
 
 namespace Kanboard\Plugin\Color_filter\Controller;
 
-use Kanboard\Controller\Base;
+use Kanboard\Controller\BaseController;
 
 /**
  * Colors
@@ -10,7 +10,7 @@ use Kanboard\Controller\Base;
  * @package controller
  * @author  Martin Middeke
  */
-class Colors extends Base
+class ColorsController extends BaseController
 {
     /**
      * Colors index page in task settings
@@ -74,7 +74,7 @@ class Colors extends Base
         }
         if ($this->colors->create($project['id'], $values)) {
             $this->flash->success(t('Your custom colorname has been updated successfully.'));
-            $this->response->redirect($this->helper->url->to('colors', 'index', array('plugin' => 'color_filter', 'project_id' => $project['id'])));
+            $this->response->redirect($this->helper->url->to('colorsController', 'index', array('plugin' => 'color_filter', 'project_id' => $project['id'])));
         } else {
             $this->flash->failure(t('Unable to updated your custom colorname.'));
         }
@@ -90,9 +90,9 @@ class Colors extends Base
     public function save_config()
     {
         $values = $this->request->getValues();
-            if ($this->config->save($values)) {
+            if ($this->configModel->save($values)) {
                 $this->flash->success(t('Your custom colorname has been updated successfully.'));
-                $this->response->redirect($this->helper->url->to('colors', 'config', array('plugin' => 'color_filter')));
+                $this->response->redirect($this->helper->url->to('colorsController', 'config', array('plugin' => 'color_filter')));
             } else {
                 $this->flash->failure(t('Unable to updated your custom colorname.'));
             }

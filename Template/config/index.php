@@ -1,4 +1,4 @@
-<form method="post" action="<?= $this->url->href('colors', 'save_config', array('plugin' => 'color_filter')) ?>" autocomplete="off">
+<form method="post" action="<?= $this->url->href('colorsController', 'save_config', array('plugin' => 'color_filter')) ?>" autocomplete="off">
 
     <?= $this->form->csrf() ?>
 

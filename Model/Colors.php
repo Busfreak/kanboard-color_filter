@@ -2,7 +2,7 @@
 
 namespace Kanboard\Plugin\Color_filter\Model;
 
-use Kanboard\Model\Base;
+use Kanboard\Core\Base;
 
 /**
  * Colors
@@ -24,7 +24,7 @@ class Colors extends Base
     {
 
         $app_colors = $this->getAppColors();
-        $projectMetadata = $this->projectMetadata->getAll($project_id);
+        $projectMetadata = $this->projectMetadataModel->getAll($project_id);
         $project_colors = array();
 
         foreach ($app_colors as $color_id => $color_names) {
@@ -59,7 +59,7 @@ class Colors extends Base
 
         foreach ($colors as $color_id => $color_name) {
 #            $app_colors['colors_' . $color_id] = $this->config->get('colors_' . $color_id, $color_name);
-            $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->config->get('colors_' . $color_id, $color_name));
+            $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->configModel->get('colors_' . $color_id, $color_name));
         }
             
         return $app_colors;
@@ -75,7 +75,7 @@ class Colors extends Base
      */
     public function remove($project_id, $name)
     {
-		return $this->projectMetadata->remove($project_id, 'color_filter_' . $name);
+		return $this->projectMetadataModel->remove($project_id, 'color_filter_' . $name);
     }
 
     /**
@@ -93,6 +93,6 @@ class Colors extends Base
             $createarray['color_filter_' . $key] = $value;
         }
 
-        return $this->projectMetadata->save($project_id, $createarray);
+        return $this->projectMetadataModel->save($project_id, $createarray);
     }
 }
