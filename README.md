@@ -10,4 +10,4 @@ This plugin provides additional color-based filter for the single board-view and
 
 Create a folder Color_filter in the plugin folder an copy all files inside.
 
-The plugin depends on Kanboard 1.0.27.
+The plugin depends on Kanboard 1.0.29.
