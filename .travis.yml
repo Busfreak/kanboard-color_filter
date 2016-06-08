@@ -12,3 +12,22 @@ env:
   global:
     - PLUGIN=Color_filter
     - KANBOARD_REPO=https://github.com/Busfreak/kanboard-color_filte.git
+  matrix:
+    - DB=sqlite
+    - DB=mysql
+    - DB=postgres
+
+matrix:
+  fast_finish: true
+
+install:
+  - git clone --depth 1 $KANBOARD_REPO
+  - ln -s $TRAVIS_BUILD_DIR kanboard/plugins/$PLUGIN
+
+before_script:
+  - cd kanboard
+  - phpenv config-add tests/php.ini
+  - composer install
+  - ls -la plugins/
+
+script:
