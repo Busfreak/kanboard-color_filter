@@ -16,7 +16,6 @@ class Plugin extends Base
         $this->template->hook->attach('template:app:filters-helper:after', 'color_filter:app/color_filter');
         $this->template->hook->attach('template:config:sidebar', 'color_filter:config/sidebar');
 
-        $this->template->setTemplateOverride('task/color_picker', 'color_filter:task/color_picker');
         $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
 
         $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);

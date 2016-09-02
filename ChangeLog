@@ -1,5 +1,12 @@
-Version 1.2.1
+Version 1.2.2
+-------------
+Updates for KB 1.0.33
 
+Changes:
+- remove unused color_picker template
+
+Version 1.2.1
+-------------
 Updates for KB 1.0.27
 
 New features:
