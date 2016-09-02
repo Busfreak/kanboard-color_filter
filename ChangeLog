@@ -6,6 +6,7 @@ Changes:
 - remove unused color_picker template
 - repare custom routes
 - clean up and comment Plugin.php
+- moved color settings template for project
 
 Version 1.2.2
 -------------

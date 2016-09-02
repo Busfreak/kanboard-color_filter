@@ -30,7 +30,7 @@ class ColorsController extends BaseController
             $values[$color_id . '_hide'] = $color_names['color_hide'];
         }
 
-        $this->response->html($this->helper->layout->project('color_filter:colors/index', array(
+        $this->response->html($this->helper->layout->project('color_filter:project/colors', array(
             'title' => t('Color Settings'),
             'project' => $project,
             'values' => $values,
