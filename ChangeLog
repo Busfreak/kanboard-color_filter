@@ -1,4 +1,4 @@
-Version 1.2.2
+Version 1.2.3
 -------------
 Updates for KB 1.0.33
 
@@ -6,6 +6,10 @@ Changes:
 - remove unused color_picker template
 - repare custom routes
 - clean up and comment Plugin.php
+
+Version 1.2.2
+-------------
+Updates for KB 1.0.29
 
 Version 1.2.1
 -------------
