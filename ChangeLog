@@ -7,6 +7,8 @@ Changes:
 - repare custom routes
 - clean up and comment Plugin.php
 - moved color settings template for project
+- new function getList for hooking in ColorModel
+- use new hook for changing color names in whole application
 
 Version 1.2.2
 -------------

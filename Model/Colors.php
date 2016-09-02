@@ -13,6 +13,51 @@ use Kanboard\Core\Base;
 class Colors extends Base
 {
 
+    public function getList($listing)
+    {
+        $ColorsController = ($this->router->getController() === 'ColorsController');
+
+        $app_colors = array();
+
+        foreach ($listing as $color_id => $color_name) {
+            $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->configModel->get('colors_' . $color_id, $color_name));
+        }
+
+
+        $project_id = $this->request->getIntegerParam('project_id', 0);
+        $projectMetadata = $this->projectMetadataModel->getAll($project_id);
+        $project_colors = array();
+
+        foreach ($app_colors as $color_id => $color_names) {
+            if (array_key_exists ('color_filter_' . $color_id, $projectMetadata)) {
+                $project_color = $projectMetadata['color_filter_' . $color_id];
+            } else {
+                $project_color = '';
+            }
+
+            if (array_key_exists ('color_filter_' . $color_id . '_hide', $projectMetadata)) {
+                $color_hide = true;
+            } else {
+                $color_hide = false;
+            }
+
+            $project_colors[$color_id] = array('color_name' => $color_names['color_name'], 'app_color' => $color_names['app_color'], 'project_color' => $project_color, 'color_hide' => $color_hide);
+        }
+
+        $colors = array();
+
+        foreach ($project_colors as $color_id => $color_values) {
+            if (! array_key_exists ('color_filter_' . $color_id, $project_colors)) {
+                if(! $color_values['color_hide'] OR $ColorsController){
+                    $colors[$color_id] = $color_values['color_name'];
+                    if (strlen($color_values['app_color']) > 0) $colors[$color_id] = $color_values['app_color'];
+                    if (strlen($color_values['project_color']) > 0) $colors[$color_id] = $color_values['project_color'];
+                }
+            }
+        }
+        return $colors;
+    }
+
     /**
      * Get all assigned colornames for a project
      *

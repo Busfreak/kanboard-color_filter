@@ -29,6 +29,11 @@ class Plugin extends Base
         $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
         $this->applicationAccessMap->add('colors', 'config', Role::APP_ADMIN);
 
+        // change colors in ColorModel
+        $this->hook->on('model:color:get-list', function (array &$colors){
+            $colors = $this->colors->getList($colors);
+        });
+
     }
 
      public function onStartup()
