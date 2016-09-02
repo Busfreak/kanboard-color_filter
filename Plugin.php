@@ -11,16 +11,24 @@ class Plugin extends Base
     public function initialize()
     {
 
+        // Route to global settings
         $this->route->addRoute('/settings/colors', 'ColorsController', 'config', 'color_filter');
+        // Route to project settings
         $this->route->addRoute('/project/:project_id/colors', 'ColorsController', 'index', 'color_filter');
+        // show color-filter drop-down
         $this->template->hook->attach('template:app:filters-helper:after', 'color_filter:app/color_filter');
+        // show sidebar link in global settings
         $this->template->hook->attach('template:config:sidebar', 'color_filter:config/sidebar');
+        // show sidebar link in project settings
+        $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
 
-        $this->hook->on('template:layout:css', 'plugins/Color_filter/css/style.css');
+        // include custom css
+        $this->hook->on('template:layout:css', array('template' => 'plugins/Color_filter/css/style.css'));
 
+        // set access rights
         $this->projectAccessMap->add('colors', '*', Role::PROJECT_MANAGER);
         $this->applicationAccessMap->add('colors', 'config', Role::APP_ADMIN);
-        $this->template->hook->attach('template:project:sidebar', 'color_filter:project/sidebar');
+
     }
 
      public function onStartup()
