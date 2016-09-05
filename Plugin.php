@@ -30,8 +30,9 @@ class Plugin extends Base
         $this->applicationAccessMap->add('colors', 'config', Role::APP_ADMIN);
 
         // change colors in ColorModel
-        $this->hook->on('model:color:get-list', function (array &$colors){
-            $colors = $this->colors->getList($colors);
+        $container = $this->container;
+        $this->hook->on('model:color:get-list', function (array &$colors) use ($container) {
+            $colors = $container['colors']->getList($colors);
         });
 
     }
