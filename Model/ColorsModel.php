@@ -5,12 +5,12 @@ namespace Kanboard\Plugin\Color_filter\Model;
 use Kanboard\Core\Base;
 
 /**
- * Colors
+ * Colors model
  *
  * @package  model
  * @author   Martin Middeke
  */
-class Colors extends Base
+class ColorsModel extends Base
 {
 
     /**
@@ -28,7 +28,7 @@ class Colors extends Base
         $project_id = $this->request->getIntegerParam('project_id', 0);
         $project_colors = $this->getProjectColors($project_id, $this->getAppColors($listing));
 
-        return $this->colors->getProjectColorNames($project_colors);
+        return $this->colorsModel->getProjectColorNames($project_colors);
     }
 
     /**

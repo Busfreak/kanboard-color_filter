@@ -13,6 +13,6 @@ class ColorsHelper extends Base
      */
      public function getColors($project_id)
     {
-		return $this->colors->getProjectColorNames($this->colors->getProjectColors($project_id));
+		return $this->colorsModel->getProjectColorNames($this->colorsModel->getProjectColors($project_id));
     }
 }

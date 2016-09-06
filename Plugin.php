@@ -32,7 +32,7 @@ class Plugin extends Base
         // change colors in ColorModel
         $container = $this->container;
         $this->hook->on('model:color:get-list', function (array &$colors) use ($container) {
-            $colors = $container['colors']->getList($colors);
+            $colors = $container['colorsModel']->getList($colors);
         });
 
     }
@@ -46,7 +46,7 @@ class Plugin extends Base
     {
         return array(
             'Plugin\Color_filter\Model' => array(
-                'Colors',
+                'ColorsModel',
             )
         );
     }
