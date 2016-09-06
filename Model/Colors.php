@@ -13,9 +13,16 @@ use Kanboard\Core\Base;
 class Colors extends Base
 {
 
+    /**
+     * Get available colors from application and replace with colors from board if not in ColorsController settings
+     *
+     * @access public
+     * @param  bool $prepend
+     * @return array
+     */
     public function getList($listing)
     {
-        $ColorsController = ($this->router->getController() === 'ColorsController');
+		if ($this->router->getController() === 'ColorsController') return $listing;
 
         $app_colors = array();
 
@@ -48,7 +55,7 @@ class Colors extends Base
 
         foreach ($project_colors as $color_id => $color_values) {
             if (! array_key_exists ('color_filter_' . $color_id, $project_colors)) {
-                if(! $color_values['color_hide'] OR $ColorsController){
+                if(! $color_values['color_hide']){
                     $colors[$color_id] = $color_values['color_name'];
                     if (strlen($color_values['app_color']) > 0) $colors[$color_id] = $color_values['app_color'];
                     if (strlen($color_values['project_color']) > 0) $colors[$color_id] = $color_values['project_color'];
