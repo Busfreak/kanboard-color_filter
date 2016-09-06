@@ -22,47 +22,13 @@ class Colors extends Base
      */
     public function getList($listing)
     {
+		// don nothing if in colors settings
 		if ($this->router->getController() === 'ColorsController') return $listing;
 
-        $app_colors = array();
-
-        foreach ($listing as $color_id => $color_name) {
-            $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->configModel->get('colors_' . $color_id, $color_name));
-        }
-
-
         $project_id = $this->request->getIntegerParam('project_id', 0);
-        $projectMetadata = $this->projectMetadataModel->getAll($project_id);
-        $project_colors = array();
+        $project_colors = $this->getProjectColors($project_id, $this->getAppColors($listing));
 
-        foreach ($app_colors as $color_id => $color_names) {
-            if (array_key_exists ('color_filter_' . $color_id, $projectMetadata)) {
-                $project_color = $projectMetadata['color_filter_' . $color_id];
-            } else {
-                $project_color = '';
-            }
-
-            if (array_key_exists ('color_filter_' . $color_id . '_hide', $projectMetadata)) {
-                $color_hide = true;
-            } else {
-                $color_hide = false;
-            }
-
-            $project_colors[$color_id] = array('color_name' => $color_names['color_name'], 'app_color' => $color_names['app_color'], 'project_color' => $project_color, 'color_hide' => $color_hide);
-        }
-
-        $colors = array();
-
-        foreach ($project_colors as $color_id => $color_values) {
-            if (! array_key_exists ('color_filter_' . $color_id, $project_colors)) {
-                if(! $color_values['color_hide']){
-                    $colors[$color_id] = $color_values['color_name'];
-                    if (strlen($color_values['app_color']) > 0) $colors[$color_id] = $color_values['app_color'];
-                    if (strlen($color_values['project_color']) > 0) $colors[$color_id] = $color_values['project_color'];
-                }
-            }
-        }
-        return $colors;
+        return $this->colors->getProjectColorNames($project_colors);
     }
 
     /**
@@ -72,26 +38,20 @@ class Colors extends Base
      * @param  integer   $project_id
      * @return array
      */
-    public function getProjectColors($project_id)
+    public function getProjectColors($project_id, $app_colors = NULL)
     {
 
-        $app_colors = $this->getAppColors();
+        if(! isset($app_colors)) $app_colors = $this->getAppColors($this->helper->task->getColors());
         $projectMetadata = $this->projectMetadataModel->getAll($project_id);
         $project_colors = array();
 
         foreach ($app_colors as $color_id => $color_names) {
-            if (array_key_exists ('color_filter_' . $color_id, $projectMetadata)) {
-                $project_color = $projectMetadata['color_filter_' . $color_id];
-            } else {
-                $project_color = '';
-            }
+            $project_color = $projectMetadata['color_filter_' . $color_id];
 
+            $color_hide = false;
             if (array_key_exists ('color_filter_' . $color_id . '_hide', $projectMetadata)) {
                 $color_hide = true;
-            } else {
-                $color_hide = false;
             }
-
             $project_colors[$color_id] = array('color_name' => $color_names['color_name'], 'app_color' => $color_names['app_color'], 'project_color' => $project_color, 'color_hide' => $color_hide);
         }
 
@@ -99,18 +59,40 @@ class Colors extends Base
     }
 
     /**
-     * Get all assigned colornames for the application
+     * Get colornames for a project
      *
      * @access public
+     * @param  integer   $project_id
      * @return array
      */
-    public function getAppColors()
+    public function getProjectColorNames($project_colors)
+    {
+        $colors = array();
+
+		foreach ($project_colors as $color_id => $color_values) {
+            if (! array_key_exists ('color_filter_' . $color_id, $project_colors)) {
+                if(! $color_values['color_hide']){
+                    $colors[$color_id] = $color_values['color_name'];
+                    if (strlen($color_values['app_color']) > 0) $colors[$color_id] = $color_values['app_color'];
+                    if (strlen($color_values['project_color']) > 0) $colors[$color_id] = $color_values['project_color'];
+                }
+            }
+        }
+        return $colors;
+
+	}
+
+    /**
+     * Get all assigned colornames for the application
+     *
+     * @access private
+     * @return array
+     */
+    private function getAppColors($colors)
     {
         $app_colors = array();
-        $colors = $this->helper->task->getColors();
 
         foreach ($colors as $color_id => $color_name) {
-#            $app_colors['colors_' . $color_id] = $this->config->get('colors_' . $color_id, $color_name);
             $app_colors[$color_id] = array('color_name' => $color_name, 'app_color' => $this->configModel->get('colors_' . $color_id, $color_name));
         }
             
