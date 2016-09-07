@@ -46,12 +46,16 @@ class ColorsModel extends Base
         $project_colors = array();
 
         foreach ($app_colors as $color_id => $color_names) {
-            $project_color = $projectMetadata['color_filter_' . $color_id];
+            $project_color = '';
+            if (array_key_exists ('color_filter_' . $color_id, $projectMetadata)) {
+                $project_color = $projectMetadata['color_filter_' . $color_id];
+            }
 
             $color_hide = false;
             if (array_key_exists ('color_filter_' . $color_id . '_hide', $projectMetadata)) {
                 $color_hide = true;
             }
+
             $project_colors[$color_id] = array('color_name' => $color_names['color_name'], 'app_color' => $color_names['app_color'], 'project_color' => $project_color, 'color_hide' => $color_hide);
         }
 
