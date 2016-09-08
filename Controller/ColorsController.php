@@ -20,7 +20,7 @@ class ColorsController extends BaseController
     public function index()
     {
         $project = $this->getProject();
-        $project_colors = $this->colors->getProjectColors($project['id']);
+        $project_colors = $this->colorsModel->getProjectColors($project['id']);
         $colors = $this->helper->task->getColors();
         $values = array();
 
@@ -61,18 +61,18 @@ class ColorsController extends BaseController
     {
         $project = $this->getProject();
         $values = $this->request->getValues();
-        $project_colors = $this->colors->getProjectColors($project['id']);
+        $project_colors = $this->colorsModel->getProjectColors($project['id']);
 
         foreach ($project_colors as $color_id => $color_names) {
-            $this->colors->remove($project['id'], $color_id . '_hide');
+            $this->colorsModel->remove($project['id'], $color_id . '_hide');
             if (array_key_exists ($color_id, $values)) {
                 if (strlen($values[$color_id]) == 0) {
-                    $this->colors->remove($project['id'], $color_id);
+                    $this->colorsModel->remove($project['id'], $color_id);
                     unset($values[$color_id]);
                 }
             }
         }
-        if ($this->colors->create($project['id'], $values)) {
+        if ($this->colorsModel->create($project['id'], $values)) {
             $this->flash->success(t('Your custom colorname has been updated successfully.'));
             $this->response->redirect($this->helper->url->to('colorsController', 'index', array('plugin' => 'color_filter', 'project_id' => $project['id'])));
         } else {
